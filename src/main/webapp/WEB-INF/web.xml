@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app
+    version="3.0"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <!--
+        Infinispan CDI Integration requires following resource-env-ref definitions
+        see: https://developer.jboss.org/thread/277425
+    -->
+    <resource-env-ref>
+        <resource-env-ref-name>reproducer-cache-container</resource-env-ref-name>
+        <resource-env-ref-type>org.infinispan.manager.CacheContainer</resource-env-ref-type>
+        <lookup-name>java:jboss/infinispan/container/reproducer</lookup-name>
+    </resource-env-ref>
+
+    <resource-env-ref>
+        <resource-env-ref-name>foo-cache-configuration</resource-env-ref-name>
+        <resource-env-ref-type>org.infinispan.configuration.cache.Configuration</resource-env-ref-type>
+        <lookup-name>java:jboss/infinispan/configuration/reproducer/foo</lookup-name>
+    </resource-env-ref>
+    
+
+</web-app>

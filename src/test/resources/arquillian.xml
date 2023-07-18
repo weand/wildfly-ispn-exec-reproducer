@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arquillian xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://jboss.org/schema/arquillian"
+    xsi:schemaLocation="http://jboss.org/schema/arquillian http://www.jboss.org/schema/arquillian/arquillian_1_0.xsd">
+    <defaultProtocol type="Servlet 3.0" />
+    <engine>
+        <property name="deploymentExportPath">target/deployments</property>
+    </engine>
+    <group qualifier="server" default="true">
+        <container qualifier="server1" default="true">
+            <configuration>
+                <property name="jbossHome">${wfly1.home}</property>
+                <property name="startupTimeoutInSeconds">60</property>
+                <property name="managementPort">9990</property>
+                <property name="javaVmArguments">
+                    -agentlib:jdwp=transport=dt_socket,address=18787,server=y,suspend=n
+                    -Djboss.node.name=server1
+                    -Djboss.server.log.dir=${basedir}/target/server1-log
+                    -Djboss.socket.binding.port-offset=0
+                    -Djava.net.preferIPv4Stack=true
+                    -Djboss.default.multicast.address=230.0.0.4
+                    -Djgroups.bind_addr=127.0.0.1
+                    -Djgroups.udp.mcast_port=46799
+                    -Darquillian.debug=false
+                </property>
+            </configuration>
+        </container>
+       <container qualifier="server2">
+            <configuration>
+                <property name="jbossHome">${wfly2.home}</property>
+                <property name="startupTimeoutInSeconds">60</property>
+                <property name="managementPort">19990</property>
+                <property name="javaVmArguments">
+                    -agentlib:jdwp=transport=dt_socket,address=28787,server=y,suspend=n
+                    -Djboss.node.name=server2
+                    -Djboss.server.log.dir=${basedir}/target/server2-log
+                    -Djboss.socket.binding.port-offset=10000
+                    -Djava.net.preferIPv4Stack=true
+                    -Djboss.default.multicast.address=230.0.0.4
+                    -Djgroups.bind_addr=127.0.0.1
+                    -Djgroups.udp.mcast_port=46799
+                    -Darquillian.debug=false
+                </property>
+            </configuration>
+        </container>
+    </group>
+</arquillian>
